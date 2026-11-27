@@ -1,7 +1,7 @@
 // PictoRescate – service worker
 // Con internet: siempre busca la versión nueva. Sin internet: usa la copia guardada.
 // Cambiá VERSION cada vez que subas cambios.
-const VERSION = 'pictorescate-v3';
+const VERSION = 'pictorescate-v4';
 const FILES = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', e => {
