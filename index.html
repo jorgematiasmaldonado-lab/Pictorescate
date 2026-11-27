@@ -422,7 +422,11 @@ else { const rec=new SR(); rec.lang='es-AR'; rec.interimResults=false;
 let deferred=null;
 window.addEventListener('beforeinstallprompt',e=>{ e.preventDefault(); deferred=e; $('#install').style.display='inline-block'; });
 $('#install').onclick=async()=>{ if(!deferred) return; deferred.prompt(); try{ await deferred.userChoice; }catch(_){} deferred=null; $('#install').style.display='none'; };
-if('serviceWorker' in navigator && location.protocol==='https:'){ try{ navigator.serviceWorker.register('sw.js').catch(()=>{}); }catch(_){} }
+if('serviceWorker' in navigator && location.protocol==='https:'){ try{
+  const hadSW = !!navigator.serviceWorker.controller; let reloaded=false;
+  navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{});
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{ if(hadSW && !reloaded){ reloaded=true; location.reload(); } });
+}catch(_){} }
 
 drawBoard(); drawChat();
 window.addEventListener('resize',()=>{ drawBoard(); });
