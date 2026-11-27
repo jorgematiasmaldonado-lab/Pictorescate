@@ -1,5 +1,5 @@
 // PictoRescate – funciona sin internet. Cambiá VERSION cada vez que subas cambios.
-const VERSION = 'pictorescate-v1';
+const VERSION = 'pictorescate-v2';
 const FILES = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(VERSION).then(c => c.addAll(FILES))); self.skipWaiting(); });
 self.addEventListener('activate', e => {
